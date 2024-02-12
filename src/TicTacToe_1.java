@@ -35,23 +35,25 @@ public class TicTacToe_1 {
     public void play(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("\nWelcome to Tic-Tac-Toe Game!");
+        System.out.println("E = Empty\n");
 
         System.out.print("Do you want to play first? (Y/N): ");
         char choice = scanner.next().toUpperCase().charAt(0);
         boolean humanFirst = (choice == 'Y');
 
 
-        if (!humanFirst) {
-            currentPlayer = Cell.O;
+        if (humanFirst) {
+            currentPlayer = Cell.X;
 
+        }else{
+            currentPlayer = Cell.O;
         }
 
         int moverLeft = BOARD_SIZE * BOARD_SIZE;
         while(moverLeft > 0 ){
-            if(currentPlayer == Cell.X && humanFirst || currentPlayer == Cell.O && !humanFirst){
+            if(currentPlayer == Cell.X){
                 // Human's turn:
                 System.out.print("Your turn: ( row[0-2] col[0-2] ): ");
-//                currentPlayer == Cell.X
                 int row = scanner.nextInt();
                 int col = scanner.nextInt();
 
@@ -62,7 +64,7 @@ public class TicTacToe_1 {
                         System.out.println("\nCongratulations, You Win!");
                         return;
                     }
-                    currentPlayer = (currentPlayer == Cell.X) ? Cell.O : Cell.X;
+                    currentPlayer = Cell.O;
                     moverLeft--;
                 }
                 else{
@@ -75,9 +77,10 @@ public class TicTacToe_1 {
                 board[computerMove[0]][computerMove[1]] = currentPlayer;
                 printBoard();
                 if(checkWinner()){
-                    System.out.println("\nComputer win!");
+                    System.out.println("\nComputer win! Computer win! Computer win!");
+                    return;
                 }
-                currentPlayer = (currentPlayer == Cell.X) ? Cell.O : Cell.X;
+                currentPlayer = Cell.X;
                 moverLeft--;
             }
         }
